@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         recyclerView.setAdapter(adapter);
 
         initLoader();
-        loadData();
+        //loadData();
         initListener();
 
         final IProfile profile = new ProfileDrawerItem().withIcon(R.drawable.ic_dev);
