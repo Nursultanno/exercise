@@ -26,7 +26,7 @@ public class AboutDevActivity extends BaseActivity {
 
         initToolbar(true);
         setToolbarTitle(getString(R.string.about_dev));
-        enableUpButton();
+        //enableUpButton();
     }
 
     @Override
