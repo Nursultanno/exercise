@@ -13,7 +13,7 @@ public class AboutDevActivity extends BaseActivity {
 
     private ImageView imageView;
     private TextView tvDevTitle, tvDevSubTitle, tvDevText;
-//hjfgygh
+//hjfgyghsdga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
