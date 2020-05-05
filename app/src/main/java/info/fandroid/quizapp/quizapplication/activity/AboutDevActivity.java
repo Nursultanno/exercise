@@ -10,7 +10,7 @@ import info.fandroid.quizapp.quizapplication.R;
 import info.fandroid.quizapp.quizapplication.utilities.ActivityUtilities;
 
 public class AboutDevActivity extends BaseActivity {
-
+//hvjcvhjbm
     private ImageView imageView;
     private TextView tvDevTitle, tvDevSubTitle, tvDevText;
 
