@@ -3,6 +3,7 @@ package info.fandroid.quizapp.quizapplication.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,6 +14,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,7 +33,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,6 +62,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     private Button btnNext;
     private RecyclerView mRecyclerQuiz;
     private TextView tvQuestionText;
+    private WebView webView;
     private TextView tvQuestionTitle;
     private ImageView imgFirstLife, imgSecondLife, imgThirdLife, imgFourthLife, imgFifthLife;
 
@@ -69,10 +74,15 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     private int mQuestionPosition = 0;
     private int mQuestionsCount = 0;
     private int mScore = 0, mWrongAns = 0, mSkip = 0;
+    private int mScore1 = 0, mWrongAns1 = 0, mSkip1 = 0;
     private int mLifeCounter = 5;
     private boolean mUserHasPressed = false;
     private boolean mIsSkipped = false, mIsCorrect = false;
-    private String mQuestionText, mGivenAnsText, mCorrectAnsText, mCategoryId;
+    private String mQuestionText;
+    private String mAns_all;
+    private String mGivenAnsText;
+    private String mCorrectAnsText;
+    private String mCategoryId;
     private ArrayList<ResultModel> mResultList;
     private RewardedVideoAd mRewardedVideoAd;
 
@@ -93,7 +103,6 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         initView();
         loadData();
         initListener();
-
 
     }
     public void initializeRewardedAds() {
@@ -128,6 +137,9 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
 
     private void initView() {
         setContentView(R.layout.activity_quiz);
+
+        webView = findViewById(R.id.Quesimage);
+
 
         imgFirstLife = (ImageView) findViewById(R.id.firstLife);
         imgSecondLife = (ImageView) findViewById(R.id.secondLife);
@@ -192,6 +204,12 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
                     DialogUtilities dialog = DialogUtilities.newInstance(getString(R.string.skip_text), getString(R.string.skip_prompt), getString(R.string.yes), getString(R.string.no), AppConstants.BUNDLE_KEY_SKIP_OPTION);
                     dialog.show(manager, AppConstants.BUNDLE_KEY_DIALOG_FRAGMENT);
                 } else {
+                    if(mScore1==1){
+                        mScore++;
+                    mIsCorrect = true;}
+                    else if(mWrongAns1==1){
+                        mWrongAns++;}
+                    mCorrectAnsText = mItemList.get(mQuestionPosition).getAnswers().get(mItemList.get(mQuestionPosition).getCorrectAnswer());
                     updateResultSet();
                     setNextQuestion();
                 }
@@ -201,44 +219,50 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         mAdapter.setItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {
-                if (!mUserHasPressed) {
+                mScore1 = 0;
+                mWrongAns1 = 0;
                     int clickedAnswerIndex = position;
                     if (mItemList.get(mQuestionPosition).getCorrectAnswer() != -1) {
                         for (int currentItemIndex = 0; currentItemIndex < mOptionList.size(); currentItemIndex++) {
+
+                            mBackgroundColorList.set(currentItemIndex, AppConstants.COLOR_WHITE);
                             if (currentItemIndex == clickedAnswerIndex && currentItemIndex == mItemList.get(mQuestionPosition).getCorrectAnswer()) {
                                 mBackgroundColorList.set(currentItemIndex, AppConstants.COLOR_GREEN);
-                                mScore++;
-                                mIsCorrect = true;
+
+
+                                mScore1++;
+
                                 if (isSoundOn) {
                                     mBeatBox.play(mSounds.get(AppConstants.BUNDLE_KEY_ZERO_INDEX));
                                 }
                             } else if (currentItemIndex == clickedAnswerIndex && !(currentItemIndex == mItemList.get(mQuestionPosition).getCorrectAnswer())) {
-                                mBackgroundColorList.set(currentItemIndex, AppConstants.COLOR_RED);
-                                mWrongAns++;
-                                if (isSoundOn) {
-                                    mBeatBox.play(mSounds.get(AppConstants.BUNDLE_KEY_SECOND_INDEX));
-                                }
-                                decreaseLifeAndStatus();
-                            } else if (currentItemIndex == mItemList.get(mQuestionPosition).getCorrectAnswer()) {
                                 mBackgroundColorList.set(currentItemIndex, AppConstants.COLOR_GREEN);
-                                ((LinearLayoutManager) mRecyclerQuiz.getLayoutManager()).scrollToPosition(currentItemIndex);
+
+
+                                mWrongAns1++;
+                                if (isSoundOn) {
+                                    mBeatBox.play(mSounds.get(AppConstants.BUNDLE_KEY_ZERO_INDEX));
+                                }
+
                             }
                         }
                     } else {
                         mBackgroundColorList.set(clickedAnswerIndex, AppConstants.COLOR_GREEN);
-                        mScore++;
-                         mIsCorrect = true;
+
+
+                        mScore1++;
+                        mIsCorrect = true;
                         mBeatBox.play(mSounds.get(AppConstants.BUNDLE_KEY_ZERO_INDEX));
                     }
 
-                     mGivenAnsText = mItemList.get(mQuestionPosition).getAnswers().get(clickedAnswerIndex);
-                    mCorrectAnsText = mItemList.get(mQuestionPosition).getAnswers().get(mItemList.get(mQuestionPosition).getCorrectAnswer());
+                    mGivenAnsText = mItemList.get(mQuestionPosition).getAnswers().get(clickedAnswerIndex);
+
 
                     mUserHasPressed = true;
                     mAdapter.notifyDataSetChanged();
-                }
-            }
 
+
+            }
         });
 
     }
@@ -335,6 +359,15 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         mAdapter.notifyDataSetChanged();
 
         mQuestionText = mItemList.get(mQuestionPosition).getQuestion();
+        String mImage_q = mItemList.get(mQuestionPosition).getImage_q();
+
+            webView.loadUrl(mImage_q);
+
+        mAns_all = mItemList.get(mQuestionPosition).getAns_all();
+
+
+
+            //webView.loadData(mImage_q, "text/html", "en_US");
 
         tvQuestionText.setText(Html.fromHtml(mQuestionText));
         tvQuestionTitle.setText(getString(R.string.quiz_question_title, mQuestionPosition + 1, mQuestionsCount));
@@ -376,6 +409,8 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
 
                 String question = jsonObj.getString(AppConstants.JSON_KEY_QUESTION);
+                String imageq = jsonObj.getString(AppConstants.JSON_KEY_IMAGE);
+                String ans_all = jsonObj.getString(AppConstants.JSON_KEY_ANS_ALL);
                 int correctAnswer = Integer.parseInt(jsonObj.getString(AppConstants.JSON_KEY_CORRECT_ANS));
                 String categoryId = jsonObj.getString(AppConstants.JSON_KEY_CATEGORY_ID);
 
@@ -390,7 +425,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
                     backgroundColors.add(AppConstants.COLOR_WHITE);
                 }
                 if (mCategoryId.equals(categoryId)) {
-                    mItemList.add(new QuizModel(question, contents, correctAnswer, categoryId, backgroundColors));
+                    mItemList.add(new QuizModel(question,  imageq, ans_all, contents, correctAnswer, categoryId, backgroundColors));
                 }
             }
 
@@ -431,6 +466,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
                  mIsSkipped = true;
                 mGivenAnsText = getResources().getString(R.string.skipped_text);
                 mCorrectAnsText = mItemList.get(mQuestionPosition).getAnswers().get(mItemList.get(mQuestionPosition).getCorrectAnswer());
+
                 updateResultSet();
                 setNextQuestion();
             } else if (viewIdText.equals(AppConstants.BUNDLE_KEY_REWARD_OPTION)) {
@@ -444,7 +480,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     }
 
     public void updateResultSet() {
-        mResultList.add(new ResultModel(mQuestionText, mGivenAnsText, mCorrectAnsText, mIsCorrect, mIsSkipped));
+        mResultList.add(new ResultModel(mQuestionText,mAns_all, mGivenAnsText, mCorrectAnsText, mIsCorrect, mIsSkipped));
         mIsCorrect = false;
         mIsSkipped = false;
     }

@@ -5,13 +5,15 @@ import android.os.Parcelable;
 
 public class ResultModel implements Parcelable {
     private String question;
+    private String ans_all;
     private String givenAns;
     private String correctAns;
     private boolean isCorrect;
     private boolean isSkip;
 
-    public ResultModel(String question, String givenAns, String correctAns, boolean isCorrect, boolean isSkip) {
+    public ResultModel(String question, String ans_all, String givenAns, String correctAns, boolean isCorrect, boolean isSkip) {
         this.question = question;
+        this.ans_all = ans_all;
         this.givenAns = givenAns;
         this.correctAns = correctAns;
         this.isCorrect = isCorrect;
@@ -20,6 +22,9 @@ public class ResultModel implements Parcelable {
 
     public String getQuestion() {
         return question;
+    }
+    public String getAns_all() {
+        return ans_all;
     }
 
     public String getGivenAns() {
@@ -46,6 +51,7 @@ public class ResultModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(question);
+        dest.writeString(ans_all);
         dest.writeString(givenAns);
         dest.writeString(correctAns);
         dest.writeByte((byte) (isCorrect ? 1 : 0));
@@ -54,6 +60,7 @@ public class ResultModel implements Parcelable {
 
     protected ResultModel(Parcel in) {
         question = in.readString();
+        ans_all = in.readString();
         givenAns = in.readString();
         correctAns = in.readString();
         isCorrect = in.readByte() != 0;

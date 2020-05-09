@@ -3,7 +3,7 @@
     package="info.fandroid.quizapp.quizapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.predmet"></activity>
+        <activity android:name=".activity.all_category" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -23,33 +25,30 @@
         </activity>
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.CustomUrlActivity" />
-        <activity android:name=".activity.AboutDevActivity"></activity>
+        <activity android:name=".activity.AboutDevActivity" />
         <activity
-            android:name="info.fandroid.quizapp.quizapplication.activity.QuizPromptActivity"
+            android:name=".activity.QuizPromptActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize"
             android:theme="@style/AppTheme" />
-
         <activity
-            android:name="info.fandroid.quizapp.quizapplication.activity.QuizActivity"
+            android:name=".activity.QuizActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="info.fandroid.quizapp.quizapplication.activity.ScoreCardActivity"
+            android:name=".activity.ScoreCardActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:theme="@style/AppTheme" />
-
-
+            android:theme="@style/AppTheme" />
         <activity
-            android:name="info.fandroid.quizapp.quizapplication.activity.NotificationListActivity"
+            android:name=".activity.NotificationListActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.SettingsActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme" />
 
-        <activity
-            android:name="info.fandroid.quizapp.quizapplication.activity.SettingsActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@style/AppTheme" />
-
-        <service android:name="info.fandroid.quizapp.quizapplication.notification.MyFirebaseMessagingService"
+        <service
+            android:name=".notification.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

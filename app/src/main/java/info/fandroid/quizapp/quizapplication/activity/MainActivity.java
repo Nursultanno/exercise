@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.SyncStateContract;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
@@ -87,14 +89,24 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
 
         mNotificationView = (RelativeLayout) findViewById(R.id.notificationView);
         recyclerView = (RecyclerView) findViewById(R.id.rvContentScore);
-        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false));
 
-        adapter = new CategoryAdapter(context, activity, categoryList);
-        recyclerView.setAdapter(adapter);
+
+
 
         initLoader();
-        loadData();
-        initListener();
+
+
+
+        ConstraintLayout buttom3 = (ConstraintLayout) findViewById(R.id.bnt1);
+        buttom3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, all_category.class);
+                startActivity(intent);
+            }
+
+            ;
+        });
 
         final IProfile profile = new ProfileDrawerItem().withIcon(R.drawable.ic_dev);
 
@@ -194,13 +206,13 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         }
     }
 
-    private void loadData() {
+    /*private void loadData() {
         showLoader();
-        loadJson();
+
 
         // show banner ads
         AdsUtilities.getInstance(context).showBannerAd((AdView) findViewById(R.id.adsView));
-    }
+    }*/
 
     private void loadJson() {
         StringBuffer sb = new StringBuffer();
@@ -243,7 +255,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         adapter.notifyDataSetChanged();
     }
 
-    private void initListener() {
+    /*private void initListener() {
 
         //notification view click listener
         mNotificationView.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +291,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
                 ActivityUtilities.getInstance().invokeCommonQuizActivity(activity, QuizPromptActivity.class, model.getCategoryId(), true);
             }
         });
-    }
+    }*/
     // received new broadcast
     private BroadcastReceiver newNotificationReceiver = new BroadcastReceiver() {
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -100,12 +101,21 @@
             android:textSize="17sp"
             tools:text="@string/quiz_prompt" />
 
+        <WebView
+            android:id="@+id/Quesimage"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvQuestionText" />
+
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvQuiz"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/btnNext"
-            android:layout_below="@id/tvQuestionText"
+            android:layout_below="@id/Quesimage"
             android:scrollbars="vertical" />
 
         <Button
@@ -117,7 +127,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/next_question" />
 
-        <include layout="@layout/view_loader" />
+        //<include layout="@layout/view_loader" />
 
     </RelativeLayout>
 

@@ -57,6 +57,8 @@ public class AppConstants {
     public static final String QUESTION_FILE = "json/quiz/question_set.json";
     public static final String JSON_KEY_QUESTIONNAIRY = "questionnaires";
     public static final String JSON_KEY_QUESTION = "question";
+    public static final String JSON_KEY_IMAGE = "image_q";
+    public static final String JSON_KEY_ANS_ALL = "correct_ans_alls";
     public static final String JSON_KEY_CORRECT_ANS = "correct_answer";
     public static final String JSON_KEY_ANSWERS = "answers";
     public static final String QUESTIONS_IN_TEST = "questions_count";

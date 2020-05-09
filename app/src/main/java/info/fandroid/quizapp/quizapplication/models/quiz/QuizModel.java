@@ -6,14 +6,16 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class QuizModel implements Parcelable {
-    String question;
+    String question, imageq,ans_all;
     ArrayList<String> answers;
     int correctAnswer;
     String questinCategoryId;
     ArrayList<String> backgroundColors;
 
-    public QuizModel(String question, ArrayList<String> answers, int correctAnswer, String questinCategoryId, ArrayList<String> backgroundColors) {
+    public QuizModel(String question, String imageq,String ans_all, ArrayList<String> answers, int correctAnswer, String questinCategoryId, ArrayList<String> backgroundColors) {
         this.question = question;
+        this.imageq = imageq;
+        this.ans_all = ans_all;
         this.correctAnswer = correctAnswer;
         this.answers = answers;
         this.questinCategoryId = questinCategoryId;
@@ -22,6 +24,12 @@ public class QuizModel implements Parcelable {
 
     public String getQuestion() {
         return question;
+    }
+    public String getImage_q() {
+        return imageq;
+    }
+    public String getAns_all() {
+        return ans_all;
     }
 
     public int getCorrectAnswer() {
@@ -52,6 +60,8 @@ public class QuizModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(question);
+        dest.writeString(ans_all);
+        dest.writeString(imageq);
         dest.writeList(answers);
         dest.writeInt(correctAnswer);
         dest.writeString(questinCategoryId);
@@ -60,6 +70,8 @@ public class QuizModel implements Parcelable {
 
     protected QuizModel(Parcel in) {
         question = in.readString();
+        imageq = in.readString();
+        ans_all = in.readString();
         in.readList(answers, QuizModel.class.getClassLoader());
         correctAnswer = in.readInt();
         questinCategoryId = in.readString();
