@@ -81,11 +81,16 @@
 
         </LinearLayout>
 
-        <TextView
+        <WebView
             android:id="@+id/image_ans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/given_ans_textd"
+            android:layout_below="@+id/given_ans_textd" />
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_ans"
 
              />
     </RelativeLayout>

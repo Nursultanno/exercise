@@ -50,9 +50,10 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView imgAns;
-        private TextView tvQuestion,tvImage, tvGivenAns, tvCorrectAns,image_ansv;
+        private TextView tvQuestion,tvImage, tvGivenAns, tvCorrectAns;
         private RelativeLayout lytAnsContainer;
         private ListItemClickListener itemClickListener;
+        private WebView image_ansv;
 
 
 
@@ -63,9 +64,10 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             // Find all views ids
             imgAns = (ImageView) itemView.findViewById(R.id.ans_icon);
             tvQuestion = (TextView) itemView.findViewById(R.id.question_text);
+            tvImage = (TextView) itemView.findViewById(R.id.text);
             tvGivenAns = (TextView) itemView.findViewById(R.id.given_ans_text);
             tvCorrectAns = (TextView) itemView.findViewById(R.id.correct_ans_text);
-            image_ansv = (TextView) itemView.findViewById(R.id.image_ans);
+            image_ansv = (WebView) itemView.findViewById(R.id.image_ans);
             lytAnsContainer = (RelativeLayout) itemView.findViewById(R.id.your_ans_container);
 
             itemView.setOnClickListener(this);
@@ -102,7 +104,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             mainHolder.tvGivenAns.setText(Html.fromHtml(model.getGivenAns()));
 
             //mainHolder.image_ans.loadUrl(WebView.findAddress(model.getGivenAns()));
-            mainHolder.image_ansv.setText(Html.fromHtml(model.getAns_all()));
+            mainHolder.tvImage.setText((model.getAns_all()));
 
 
             //webView.loadData(mImage_q, "text/html", "en_US");

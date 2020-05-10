@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
 
 
         initLoader();
-
+        initListener();
 
 
         ConstraintLayout buttom3 = (ConstraintLayout) findViewById(R.id.bnt1);
@@ -255,7 +255,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         adapter.notifyDataSetChanged();
     }
 
-    /*private void initListener() {
+    private void initListener() {
 
         //notification view click listener
         mNotificationView.setOnClickListener(new View.OnClickListener() {
@@ -266,32 +266,8 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         });
 
         // recycler list item click listener
-        adapter.setItemClickListener(new ListItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
 
-                //show snackbar and return if not purchased
-
-                boolean purchased = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_BOUGHT, false);
-                boolean subscribed = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_SUBSCRIBE, false);
-
-                if (position > 3 && !purchased && !subscribed) {
-                    // Toast.makeText(mActivity, R.string.alert_for_purchase , Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, R.string.alert_for_purchase, Snackbar.LENGTH_LONG)
-                            .setAction("Ок", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    ActivityUtilities.getInstance().invokeNewActivity(activity, SettingsActivity.class, true);
-                                }
-                            }).setDuration(4000).show();
-                    return;
-                }
-
-                CategoryModel model = categoryList.get(position);
-                ActivityUtilities.getInstance().invokeCommonQuizActivity(activity, QuizPromptActivity.class, model.getCategoryId(), true);
-            }
-        });
-    }*/
+    }
     // received new broadcast
     private BroadcastReceiver newNotificationReceiver = new BroadcastReceiver() {
 
