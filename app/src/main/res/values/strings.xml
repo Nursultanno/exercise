@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz Application</string>
+    <string name="app_name">Подготовка к ОРТ</string>
     <string name="tv_description">Проверь свои знания</string>
 
     <string name="tap_again">Нажмите Назад еще раз для выхода</string>
@@ -139,5 +139,6 @@
     <string name="quiz_promt_third_text">Пройти тест снова?</string>
     <string name="quiz_promt_first_text">Предыдущий результат: %s из %s</string>
     <string name="quiz_question_title">Вопрос %d из %d</string>
+
 
 </resources>

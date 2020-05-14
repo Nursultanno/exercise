@@ -61,10 +61,10 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     private ImageButton btnSpeaker;
     private Button btnNext;
     private RecyclerView mRecyclerQuiz;
-    private TextView tvQuestionText;
+    private WebView tvQuestionText;
     private WebView webView;
     private TextView tvQuestionTitle;
-    private ImageView imgFirstLife, imgSecondLife, imgThirdLife, imgFourthLife, imgFifthLife;
+
 
     private QuizAdapter mAdapter = null;
     private List<QuizModel> mItemList;
@@ -141,15 +141,11 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         webView = findViewById(R.id.Quesimage);
 
 
-        imgFirstLife = (ImageView) findViewById(R.id.firstLife);
-        imgSecondLife = (ImageView) findViewById(R.id.secondLife);
-        imgThirdLife = (ImageView) findViewById(R.id.thirdLife);
-        imgFourthLife = (ImageView) findViewById(R.id.fourthLife);
-        imgFifthLife = (ImageView) findViewById(R.id.fifthLife);
+        webView.setVisibility(View.GONE);
         btnSpeaker = (ImageButton) findViewById(R.id.btnSpeaker);
         btnNext = (Button) findViewById(R.id.btnNext);
 
-        tvQuestionText = (TextView) findViewById(R.id.tvQuestionText);
+        tvQuestionText = (WebView) findViewById(R.id.tvQuestionText);
         tvQuestionTitle = (TextView) findViewById(R.id.tvQuestionTitle);
 
         mRecyclerQuiz = (RecyclerView) findViewById(R.id.rvQuiz);
@@ -270,64 +266,16 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
 
 
 
-    public void decreaseLifeAndStatus() {
-        mLifeCounter--;
-        setLifeStatus();
-    }
+
 
     void increaseLifeAndStatus() {
         if (mLifeCounter < AppConstants.BUNDLE_KEY_MAX_LIFE) {
             mLifeCounter++;
-            setLifeStatus();
+
         }
     }
 
-    public void setLifeStatus() {
-        switch (mLifeCounter) {
-            case 1:
-                imgFirstLife.setVisibility(View.VISIBLE);
-                imgSecondLife.setVisibility(View.GONE);
-                imgThirdLife.setVisibility(View.GONE);
-                imgFourthLife.setVisibility(View.GONE);
-                imgFifthLife.setVisibility(View.GONE);
-                break;
-            case 2:
-                imgFirstLife.setVisibility(View.VISIBLE);
-                imgSecondLife.setVisibility(View.VISIBLE);
-                imgThirdLife.setVisibility(View.GONE);
-                imgFourthLife.setVisibility(View.GONE);
-                imgFifthLife.setVisibility(View.GONE);
-                break;
-            case 3:
-                imgFirstLife.setVisibility(View.VISIBLE);
-                imgSecondLife.setVisibility(View.VISIBLE);
-                imgThirdLife.setVisibility(View.VISIBLE);
-                imgFourthLife.setVisibility(View.GONE);
-                imgFifthLife.setVisibility(View.GONE);
-                break;
-            case 4:
-                imgFirstLife.setVisibility(View.VISIBLE);
-                imgSecondLife.setVisibility(View.VISIBLE);
-                imgThirdLife.setVisibility(View.VISIBLE);
-                imgFourthLife.setVisibility(View.VISIBLE);
-                imgFifthLife.setVisibility(View.GONE);
-                break;
-            case 5:
-                imgFirstLife.setVisibility(View.VISIBLE);
-                imgSecondLife.setVisibility(View.VISIBLE);
-                imgThirdLife.setVisibility(View.VISIBLE);
-                imgFourthLife.setVisibility(View.VISIBLE);
-                imgFifthLife.setVisibility(View.VISIBLE);
-                break;
-            default:
-                imgFirstLife.setVisibility(View.GONE);
-                imgSecondLife.setVisibility(View.GONE);
-                imgThirdLife.setVisibility(View.GONE);
-                imgFourthLife.setVisibility(View.GONE);
-                imgFifthLife.setVisibility(View.GONE);
-                break;
-        }
-    }
+
 
 
 
@@ -359,17 +307,17 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         mAdapter.notifyDataSetChanged();
 
         mQuestionText = mItemList.get(mQuestionPosition).getQuestion();
-        String mImage_q = mItemList.get(mQuestionPosition).getImage_q();
-
-            webView.loadUrl(mImage_q);
+        //String mImage_q = mItemList.get(mQuestionPosition).getImage_q();
+        tvQuestionText.loadUrl(mQuestionText);
+            //webView.loadUrl(mImage_q);
 
         mAns_all = mItemList.get(mQuestionPosition).getAns_all();
 
 
 
-            //webView.loadData(mImage_q, "text/html", "en_US");
+           // webView.loadData(mImage_q, "image/jpeg", "charset=utf-8");
 
-        tvQuestionText.setText(Html.fromHtml(mQuestionText));
+        //tvQuestionText.setText(Html.fromHtml(mQuestionText));
         tvQuestionTitle.setText(getString(R.string.quiz_question_title, mQuestionPosition + 1, mQuestionsCount));
     }
 

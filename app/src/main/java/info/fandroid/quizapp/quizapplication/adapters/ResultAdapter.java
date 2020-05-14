@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,9 +53,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
         private ImageView imgAns;
         private TextView tvQuestion,tvImage, tvGivenAns, tvCorrectAns;
-        private RelativeLayout lytAnsContainer;
+        private LinearLayout ans_container;
         private ListItemClickListener itemClickListener;
-        private WebView image_ansv;
+        private WebView image_ansv, q_web;
 
 
 
@@ -68,7 +70,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             tvGivenAns = (TextView) itemView.findViewById(R.id.given_ans_text);
             tvCorrectAns = (TextView) itemView.findViewById(R.id.correct_ans_text);
             image_ansv = (WebView) itemView.findViewById(R.id.image_ans);
-            lytAnsContainer = (RelativeLayout) itemView.findViewById(R.id.your_ans_container);
+            q_web = (WebView) itemView.findViewById(R.id.question_web);
+            ans_container = (LinearLayout) itemView.findViewById(R.id.ans_container) ;
+
+            tvImage.setVisibility(View.GONE);
+            tvQuestion.setVisibility(View.GONE);
 
             itemView.setOnClickListener(this);
 
@@ -93,13 +99,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         final ResultModel model = mItemList.get(position);
 
         // setting data over views
-        mainHolder.tvQuestion.setText(Html.fromHtml(model.getQuestion()));
-
+        mainHolder.tvQuestion.setText((model.getQuestion()));
+        String str = mainHolder.tvQuestion.getText().toString();
+        mainHolder.q_web.loadUrl(str);
         mainHolder.tvCorrectAns.setText(Html.fromHtml(model.getCorrectAns()));
         mainHolder.tvCorrectAns.setText(Html.fromHtml(model.getCorrectAns()));
 
         if (model.isCorrect()) {
-            mainHolder.lytAnsContainer.setVisibility(View.GONE);
+            mainHolder.ans_container.setVisibility(View.GONE);
         } else {
             mainHolder.tvGivenAns.setText(Html.fromHtml(model.getGivenAns()));
 
@@ -107,7 +114,10 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             mainHolder.tvImage.setText((model.getAns_all()));
 
 
-            //webView.loadData(mImage_q, "text/html", "en_US");
+
+
+            String strName = mainHolder.tvImage.getText().toString();
+            mainHolder.image_ansv.loadUrl(strName);
         }
 
         int imgPosition;

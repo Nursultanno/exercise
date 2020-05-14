@@ -1,65 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/score_container"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/ans_icon"
-        android:padding="15dp">
-
-
-
-        <TextView
-            android:id="@+id/question_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            tools:text="@string/greeting_text2" />
-
-        <RelativeLayout
-            android:id="@+id/your_ans_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/question_text">
-
-            <LinearLayout
-                android:id="@+id/ans_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/your_ans"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/given_ans_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="0.5"
-                    android:textColor="@color/red"
-                    tools:text="@string/greeting_text1" />
-            </LinearLayout>
-
-        </RelativeLayout>
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/question_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/ans_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <WebView
+                    android:id="@+id/question_web"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ans_icon"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                </WebView>
+
+                <ImageView
+                    android:id="@+id/ans_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:padding="6dp"
+                    app:layout_constraintStart_toEndOf="@+id/question_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/result_1" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ans_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_ans"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/given_ans_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="0.5"
+                android:textColor="@color/red"
+                tools:text="@string/greeting_text1" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/given_ans_textd"
-            android:layout_below="@id/your_ans_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
@@ -81,36 +106,36 @@
 
         </LinearLayout>
 
-        <WebView
-            android:id="@+id/image_ans"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/given_ans_textd" />
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_ans"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-             />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/given_ans_textd"
 
-    <ImageView
-        android:id="@+id/ans_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
-        android:contentDescription="@string/app_name"
-        android:padding="6dp"
-        tools:src="@drawable/result_1" />
+                />
 
+            <WebView
+                android:id="@+id/image_ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"></WebView>
+        </LinearLayout>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:layout_below="@+id/score_container"
         android:background="@color/toolbar_boarder" />
-
 </RelativeLayout>
+
+
+
+
+
+
 

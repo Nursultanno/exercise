@@ -1,18 +1,17 @@
-
-
 {
   "questionnaires": [
     {
-      "question": "Платформа Андроид основывается на операционной системе:",
+      "question": "file:///android_asset/img/1/q1.html",
       "image_q": "",
-      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "correct_ans_alls": "file:///android_asset/img/1/qa1.html",
       "answers": [
-        "Linux",
-        "MAC",
-        "Unix",
-        "Windows CE"
+        "А) -(5/4)",
+        "Б) -(1/5)",
+        "В) 0",
+        "Г) 1/5",
+        "Д) 5/4"
       ],
-      "correct_answer": 0,
+      "correct_answer": 2,
       "question_category": "1"
     },{
       "question": "Архитектура платформы Андроид состоит из:",
@@ -63,8 +62,8 @@
       "correct_answer": 2,
       "question_category": "1"
     }
-   ]
-  }
+  ]
+}
 
 
 

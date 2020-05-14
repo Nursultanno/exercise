@@ -15,5 +15,17 @@
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
+    <style name="some_id">
+
+        <item name="android:textSize">
+            17sp
+        </item>
+
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
 
 </resources>
