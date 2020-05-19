@@ -50,7 +50,9 @@ public class AppConstants {
     // category file
     public static final String CONTENT_FILE = "json/categories/quiz_category.json";
     public static final String JSON_KEY_ITEMS = "items";
+    public static final String JSON_KEY_ITEMS2 = "items2";
     public static final String JSON_KEY_CATEGORY_ID = "question_category";
+    public static final String JSON_KEY_CATEGORY_ID2 = "question_category2";
     public static final String JSON_KEY_CATEGORY_NAME = "category_name";
 
     // question file

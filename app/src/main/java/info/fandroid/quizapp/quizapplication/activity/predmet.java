@@ -45,6 +45,7 @@ import java.util.ArrayList;
 
 import info.fandroid.quizapp.quizapplication.R;
 import info.fandroid.quizapp.quizapplication.adapters.CategoryAdapter;
+import info.fandroid.quizapp.quizapplication.adapters.CategoryAdapter2;
 import info.fandroid.quizapp.quizapplication.constants.AppConstants;
 import info.fandroid.quizapp.quizapplication.data.sqlite.NotificationDbController;
 import info.fandroid.quizapp.quizapplication.listeners.ListItemClickListener;
@@ -64,10 +65,12 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
     private RelativeLayout mNotificationView;
     private AccountHeader header = null;
     private Drawer drawer = null;
-
+    private int i=0;
     private ArrayList<CategoryModel> categoryList;
     private CategoryAdapter adapter = null;
+    private CategoryAdapter2 adapter2 = null;
     private RecyclerView recyclerView;
+    String name;
 
     predmet.CheckSubscribe checks;
     BillingProcessor bp;
@@ -85,10 +88,22 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
 
         mNotificationView = (RelativeLayout) findViewById(R.id.notificationView);
         recyclerView = (RecyclerView) findViewById(R.id.rvContentScore);
-        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 5, GridLayoutManager.VERTICAL, false));
 
+         name = getIntent().getStringExtra("os1");
+        i = Integer.parseInt(name);
+        if(i==1){
         adapter = new CategoryAdapter(context, activity, categoryList);
         recyclerView.setAdapter(adapter);
+        }
+
+        else if(i==2) {
+            adapter2 = new CategoryAdapter2(context, activity, categoryList);
+            recyclerView.setAdapter(adapter2);
+        }
+
+
+
 
         initLoader();
         loadData();
@@ -137,56 +152,112 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
     }
 
     private void parseJson(String jsonData) {
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            JSONArray jsonArray = jsonObject.getJSONArray(AppConstants.JSON_KEY_ITEMS);
+        if(i==1){
+            try {
+                JSONObject jsonObject = new JSONObject(jsonData);
+                JSONArray jsonArray = jsonObject.getJSONArray(AppConstants.JSON_KEY_ITEMS);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject object = jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
 
-                String categoryId = object.getString(AppConstants.JSON_KEY_CATEGORY_ID);
-                String categoryName = object.getString(AppConstants.JSON_KEY_CATEGORY_NAME);
+                    String categoryId = object.getString(AppConstants.JSON_KEY_CATEGORY_ID);
+                    String categoryName = object.getString(AppConstants.JSON_KEY_CATEGORY_NAME);
 
-                categoryList.add(new CategoryModel(categoryId, categoryName));
+                    categoryList.add(new CategoryModel(categoryId, categoryName));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+            hideLoader();
+            adapter.notifyDataSetChanged();
         }
-        hideLoader();
-        adapter.notifyDataSetChanged();
+
+        else if(i==2) {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonData);
+                JSONArray jsonArray = jsonObject.getJSONArray(AppConstants.JSON_KEY_ITEMS2);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
+
+                    String categoryId = object.getString(AppConstants.JSON_KEY_CATEGORY_ID);
+                    String categoryName = object.getString(AppConstants.JSON_KEY_CATEGORY_NAME);
+
+                    categoryList.add(new CategoryModel(categoryId, categoryName));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            hideLoader();
+            adapter2.notifyDataSetChanged();
+        }
+
     }
 
     private void initListener() {
 
         //notification view click listener
+        if(i==1){
+            adapter.setItemClickListener(new ListItemClickListener() {
+                @Override
+                public void onItemClick(int position, View view) {
 
+                    //show snackbar and return if not purchased
+
+                    boolean purchased = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_BOUGHT, false);
+                    boolean subscribed = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_SUBSCRIBE, false);
+
+                    if (position > 3 && !purchased && !subscribed) {
+                        // Toast.makeText(mActivity, R.string.alert_for_purchase , Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, R.string.alert_for_purchase, Snackbar.LENGTH_LONG)
+                                .setAction("Ок", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        ActivityUtilities.getInstance().invokeNewActivity(activity, SettingsActivity.class, true);
+                                    }
+                                }).setDuration(4000).show();
+                        return;
+                    }
+
+                    CategoryModel model = categoryList.get(position);
+                    ActivityUtilities.getInstance().invokeCommonQuizActivity(activity, QuizPromptActivity.class, model.getCategoryId(), true);
+                }
+            });
+        }
+
+        else if(i==2) {
+            adapter2.setItemClickListener(new ListItemClickListener() {
+                @Override
+                public void onItemClick(int position, View view) {
+
+                    //show snackbar and return if not purchased
+
+                    boolean purchased = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_BOUGHT, false);
+                    boolean subscribed = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_SUBSCRIBE, false);
+
+                    if (position > 3 && !purchased && !subscribed) {
+                        // Toast.makeText(mActivity, R.string.alert_for_purchase , Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, R.string.alert_for_purchase, Snackbar.LENGTH_LONG)
+                                .setAction("Ок", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        ActivityUtilities.getInstance().invokeNewActivity(activity, SettingsActivity.class, true);
+                                    }
+                                }).setDuration(4000).show();
+                        return;
+                    }
+
+                    CategoryModel model = categoryList.get(position);
+                    ActivityUtilities.getInstance().invokeCommonQuizActivity(activity, QuizPromptActivity.class, model.getCategoryId(), true);
+                }
+            });
+        }
 
         // recycler list item click listener
-        adapter.setItemClickListener(new ListItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
 
-                //show snackbar and return if not purchased
 
-                boolean purchased = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_BOUGHT, false);
-                boolean subscribed = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(AppConstants.PRODUCT_ID_SUBSCRIBE, false);
 
-                if (position > 3 && !purchased && !subscribed) {
-                    // Toast.makeText(mActivity, R.string.alert_for_purchase , Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, R.string.alert_for_purchase, Snackbar.LENGTH_LONG)
-                            .setAction("Ок", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    ActivityUtilities.getInstance().invokeNewActivity(activity, SettingsActivity.class, true);
-                                }
-                            }).setDuration(4000).show();
-                    return;
-                }
 
-                CategoryModel model = categoryList.get(position);
-                ActivityUtilities.getInstance().invokeCommonQuizActivity(activity, QuizPromptActivity.class, model.getCategoryId(), true);
-            }
-        });
     }
     // received new broadcast
     private BroadcastReceiver newNotificationReceiver = new BroadcastReceiver() {

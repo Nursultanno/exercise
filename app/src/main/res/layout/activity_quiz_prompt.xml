@@ -55,7 +55,7 @@
                 android:layout_below="@id/third_text"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle_blue"
-                android:text="yes"
+                android:text="Начать"
                 android:textColor="@color/white" />
 
             <Button
@@ -65,7 +65,7 @@
                 android:layout_below="@id/btn_yes"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle_red"
-                android:text="no"
+                android:text="Выбрать другой"
                 android:textColor="@color/white" />
 
         </RelativeLayout>

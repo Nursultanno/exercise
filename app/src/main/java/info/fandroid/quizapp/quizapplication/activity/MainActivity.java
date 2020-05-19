@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements DialogUtilities.OnComp
         initListener();
 
 
-        ConstraintLayout buttom3 = (ConstraintLayout) findViewById(R.id.bnt1);
+        ConstraintLayout buttom3 = (ConstraintLayout) findViewById(R.id.bot1);
         buttom3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

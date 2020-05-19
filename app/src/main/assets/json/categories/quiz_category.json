@@ -43,10 +43,26 @@
     {
       "question_category": "11",
       "category_name": "Тест 11"
+    }
+
+  ],
+  "items2": [
+    {
+      "question_category": "100",
+      "category_name": "Тест 100"
     },
     {
-      "question_category": "12",
-      "category_name": "Тест 12"
+      "question_category": "101",
+      "category_name": "Тест 100"
+    },
+    {
+      "question_category": "102",
+      "category_name": "Тест 100"
+    },
+    {
+      "question_category": "103",
+      "category_name": "Тест 100"
     }
+
   ]
 }

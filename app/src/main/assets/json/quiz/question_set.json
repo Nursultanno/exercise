@@ -50,17 +50,104 @@
       "correct_answer": 1,
       "question_category": "1"
     },{
-      "question": "Что представляет собой формат .apk?",
-      "image_q": "<p>sgvsd <b>sdg</b> d gsd g</p>",
-      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "question": "file:///android_asset/img/1/q1.html",
+      "image_q": "",
+      "correct_ans_alls": "file:///android_asset/img/1/qa1.html",
       "answers": [
-        "Android pocket kit.",
-        "Android programm key.",
-        "Android package.",
-        "Андроид файл ресурсов."
+        "А) -(5/4)",
+        "Б) -(1/5)",
+        "В) 0",
+        "Г) 1/5",
+        "Д) 5/4"
       ],
       "correct_answer": 2,
-      "question_category": "1"
+      "question_category": "2"
+    },{
+      "question": "Архитектура платформы Андроид состоит из:",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "Приложений, фреймворка приложений, библиотек, среды выполнения Андроид, ядра Linux.",
+        "Приложений, библиотек, фреймворка библиотек, среды выполнения Андроид, ядра Linux.",
+        "Приложений, телефонного менеджера, библиотек, среды выполнения Андроид.",
+        "Приложений, телефонного менеджера, библиотек, ядра Linux."
+      ],
+      "correct_answer": 0,
+      "question_category": "2"
+    },{
+      "question": "Базовая единица графического интерфейса приложения Андроид это:",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "Ничего из ниже перечисленного.",
+        "Интерактивные элементы экрана.",
+        "Layout и Drawing.",
+        "View и Viewgroups."
+      ],
+      "correct_answer": 3,
+      "question_category": "2"
+    },{
+      "question": "Как называется виртуальная машина Java платформы Андроид?",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "NET Framework",
+        "Dalvik",
+        "Forth Virtual Machine",
+        "Android Virtual Device"
+      ],
+      "correct_answer": 1,
+      "question_category": "2"
+    },
+    {
+      "question": "file:///android_asset/img/1/q1.html",
+      "image_q": "",
+      "correct_ans_alls": "file:///android_asset/img/1/qa1.html",
+      "answers": [
+        "А) -(5/4)",
+        "Б) -(1/5)",
+        "В) 0",
+        "Г) 1/5",
+        "Д) 5/4"
+      ],
+      "correct_answer": 2,
+      "question_category": "100"
+    },{
+      "question": "Архитектура платформы Андроид состоит из:",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "Приложений, фреймворка приложений, библиотек, среды выполнения Андроид, ядра Linux.",
+        "Приложений, библиотек, фреймворка библиотек, среды выполнения Андроид, ядра Linux.",
+        "Приложений, телефонного менеджера, библиотек, среды выполнения Андроид.",
+        "Приложений, телефонного менеджера, библиотек, ядра Linux."
+      ],
+      "correct_answer": 0,
+      "question_category": "100"
+    },{
+      "question": "Базовая единица графического интерфейса приложения Андроид это:",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "Ничего из ниже перечисленного.",
+        "Интерактивные элементы экрана.",
+        "Layout и Drawing.",
+        "View и Viewgroups."
+      ],
+      "correct_answer": 3,
+      "question_category": "100"
+    },{
+      "question": "Как называется виртуальная машина Java платформы Андроид?",
+      "image_q": "file:///android_asset/ic_dev.png",
+      "correct_ans_alls": "<p>sgvsd <b>sdg</b> d gsd g</p>",
+      "answers": [
+        "NET Framework",
+        "Dalvik",
+        "Forth Virtual Machine",
+        "Android Virtual Device"
+      ],
+      "correct_answer": 1,
+      "question_category": "100"
     }
   ]
 }

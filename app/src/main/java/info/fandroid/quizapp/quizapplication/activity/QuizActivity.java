@@ -159,6 +159,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         enableUpButton();
         initLoader();
 
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -319,6 +320,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
 
         //tvQuestionText.setText(Html.fromHtml(mQuestionText));
         tvQuestionTitle.setText(getString(R.string.quiz_question_title, mQuestionPosition + 1, mQuestionsCount));
+        AppPreference.getInstance(mContext).setQuizQuestionsCount(mCategoryId, mQuestionsCount);
     }
 
     public void quizActivityClosePrompt() {
@@ -407,6 +409,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     @Override
     public void onComplete(Boolean isOkPressed, String viewIdText) {
         if (isOkPressed) {
+
             if (viewIdText.equals(AppConstants.BUNDLE_KEY_CLOSE_OPTION)) {
                 ActivityUtilities.getInstance().invokeNewActivity(mActivity, MainActivity.class, true);
             } else if (viewIdText.equals(AppConstants.BUNDLE_KEY_SKIP_OPTION)) {
@@ -423,7 +426,7 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
         } else if (!isOkPressed && viewIdText.equals(AppConstants.BUNDLE_KEY_REWARD_OPTION)) {
             ActivityUtilities.getInstance().invokeScoreCardActivity(mActivity, ScoreCardActivity.class, mQuestionsCount, mScore, mWrongAns, mSkip, mCategoryId, mResultList, true);
             AppPreference.getInstance(mContext).setQuizResult(mCategoryId, mScore);
-            AppPreference.getInstance(mContext).setQuizQuestionsCount(mCategoryId, mQuestionsCount);
+
         }
     }
 
