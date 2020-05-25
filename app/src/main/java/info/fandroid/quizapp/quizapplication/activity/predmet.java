@@ -78,8 +78,10 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predmet);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         activity = predmet.this;
         context = getApplicationContext();
@@ -91,7 +93,13 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
         recyclerView.setLayoutManager(new GridLayoutManager(activity, 5, GridLayoutManager.VERTICAL, false));
 
          name = getIntent().getStringExtra("os1");
-        i = Integer.parseInt(name);
+         try{
+             i = Integer.parseInt(name);
+         }
+         catch (Exception e){
+
+         }
+
         if(i==1){
         adapter = new CategoryAdapter(context, activity, categoryList);
         recyclerView.setAdapter(adapter);
@@ -114,13 +122,11 @@ public class predmet extends BaseActivity implements DialogUtilities.OnCompleteL
 
     }
     @Override
-    public void onBackPressed() {
-        if (drawer != null && drawer.isDrawerOpen()) {
-            drawer.closeDrawer();
-        } else {
-            AppUtilities.tapPromtToExit(this);
-        }
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
+
 
     private void loadData() {
         showLoader();

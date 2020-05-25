@@ -395,16 +395,13 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                quizActivityClosePrompt();
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        quizActivityClosePrompt();
-    }
+
 
     @Override
     public void onComplete(Boolean isOkPressed, String viewIdText) {
@@ -493,5 +490,10 @@ public class QuizActivity extends BaseActivity implements RewardedVideoAdListene
     @Override
     public void onRewardedVideoCompleted() {
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -46,6 +46,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tvItemTitle;
+
         private CardView lytContainer;
         private ListItemClickListener itemClickListener;
 

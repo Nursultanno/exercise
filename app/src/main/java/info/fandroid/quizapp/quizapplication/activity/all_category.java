@@ -20,8 +20,11 @@ public class all_category extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
          mActivity = all_category.this;
          mContext = mActivity.getApplicationContext();
         ConstraintLayout buttom3 = (ConstraintLayout) findViewById(R.id.bnt1);
@@ -52,7 +55,9 @@ public class all_category extends AppCompatActivity  {
 
     }
     @Override
-    public void onBackPressed() {
-        ActivityUtilities.getInstance().invokeNewActivity(mActivity, predmet.class, true);
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
+
 }

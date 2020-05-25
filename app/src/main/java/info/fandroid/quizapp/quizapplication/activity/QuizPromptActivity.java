@@ -94,15 +94,16 @@ public class QuizPromptActivity extends BaseActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ActivityUtilities.getInstance().invokeNewActivity(mActivity, predmet.class, true);
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed() {
-        ActivityUtilities.getInstance().invokeNewActivity(mActivity, predmet.class, true);
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 

@@ -76,13 +76,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         if(score==null && questionsCount==null) {
              ans =0;
         }
+
         else {
             p = Double.parseDouble(score);
             pa = Double.parseDouble(questionsCount);
             ans = (p * 100) / pa;
         }
 
-        if(ans<50 && ans!=0)
+        if(ans<50 && ans!=0&&ans>1)
             holder.tvCategoryId.setBackground(ContextCompat.getDrawable(mContext, R.drawable.circular_red_stroke));
         else if(ans>=50 && ans<80)
             holder.tvCategoryId.setBackground(ContextCompat.getDrawable(mContext, R.drawable.circular_orendg_stroke));

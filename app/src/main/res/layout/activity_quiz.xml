@@ -48,9 +48,9 @@
             android:id="@+id/tvQuestionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvQuestionTitle"
+            android:layout_below="@+id/btnSpeaker"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
             android:lineSpacingMultiplier="1.1"
             android:textSize="17sp"
             tools:text="@string/quiz_prompt" />

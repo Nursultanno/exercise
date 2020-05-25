@@ -191,16 +191,29 @@ public class ScoreCardActivity extends BaseActivity implements OnChartValueSelec
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ActivityUtilities.getInstance().invokeNewActivity(mActivity, MainActivity.class, true);
+                //ActivityUtilities.getInstance().invokeNewActivity(mActivity, all_category.class, true);
+                onBackPressed();
                 return true;
 
+
+            /*finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);*/
         }
         return super.onOptionsItemSelected(item);
     }
-
     @Override
-    public void onBackPressed() {
-        ActivityUtilities.getInstance().invokeNewActivity(mActivity, MainActivity.class, true);
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
+    /*@Override
+    public void onBackPressed() {
+        //ActivityUtilities.getInstance().invokeNewActivity(mActivity, all_category.class, true);
+        Intent intent = new Intent(ScoreCardActivity.this, all_category.class);
+        startActivity(intent);
+
+    }*/
 
 }
